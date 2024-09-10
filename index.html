@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      :root {
+        --left: 0;
+      }
+      .pitch {
+        background-color: darkgoldenrod;
+        height: 400px;
+        width: 150px;
+        position: relative;
+        margin: 0 auto;
+      }
+      .ball,
+      .bowler,
+      .wicket,
+      .thala {
+        margin: 0 auto;
+        height: 10px;
+        width: 10px;
+      }
+      .wicket,
+      .thala {
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .thala {
+        transform: translate(-50%, -100%);
+        background-color: blue;
+      }
+      .bowler {
+        background-color: green;
+      }
+      .wicket {
+        background-color: brown;
+      }
+      .ball {
+        background-color: red;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -100%);
+
+        box-shadow: rgba(230, 11, 11, 0.5) 0px -10px;
+        border-radius: 50%;
+      }
+
+      .ball-out {
+        animation: playerOutAnimation 3s linear infinite;
+      }
+      .ball-hit {
+        animation: playerHitAnimation 3s linear infinite;
+      }
+      /* Player out animation using keyframes */
+
+      @keyframes playerOutAnimation {
+        0% {
+          box-shadow: rgba(230, 11, 11, 0.5) 0px -2px;
+        }
+
+        20% {
+          box-shadow: rgba(230, 11, 11, 0.5) 0px -13px;
+        }
+
+        65% {
+          box-shadow: rgba(230, 11, 11, 0.5) 0px 0px;
+        }
+
+        100% {
+          top: 100%;
+          box-shadow: rgba(230, 11, 11, 0.5) 0px -10px;
+        }
+      }
+
+      /* player hit animation using keyframes */
+      @keyframes playerHitAnimation {
+        100% {
+          top: 0;
+          left: var(--left);
+          box-shadow: rgba(230, 11, 11, 0.5) 0px 10px;
+        }
+
+        0% {
+          top: 100%;
+          box-shadow: rgba(230, 11, 11, 0.5) 0px 0px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pitch">
+      <div class="bowler"></div>
+      <div class="wicket"></div>
+      <div class="thala"></div>
+      <div class="ball ball-out" id="ball"></div>
+    </div>
+
+    <script>
+      function stop() {
+        document.getElementById("ball").classList.remove("ball-out");
+        document.getElementById("ball").classList.add("ball-hit");
+        console.log("function ran");
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.keyCode === 32) {
+          console.log("pressed");
+          stop();
+        }
+      });
+      let attr = Math.trunc(Math.random() * (150 - 50) + 50);
+      document.getElementById("ball").style.left = attr;
+      console.log(attr);
+    </script>
+  </body>
+</html>
