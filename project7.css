@@ -1,0 +1,153 @@
+:root {
+  --left: 0;
+  --posY: 0;
+  --thalaPos: 0;
+  --posX: 50%;
+  --leftInit: 50%;
+}
+
+.retry {
+  height: 200px;
+  margin: 0 auto;
+  width: 400px;
+  background-color: rgba(89, 78, 34, 0.5);
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  display: none;
+}
+
+#retry-button {
+  height: 50px;
+  width: 100px;
+  font-size: 25px;
+}
+
+#exit-button {
+  height: 25px;
+  width: 50px;
+}
+
+button {
+  border-radius: 10px;
+  border: none;
+  background-image: linear-gradient(black, white, black);
+  background-size: 200% 200%;
+  background-position: 50% 0%;
+  transition: background-position 1s ease;
+}
+
+button:hover {
+  background-position: 50% 100%;
+}
+
+.pitch {
+  background-color: darkgoldenrod;
+  height: 80vh;
+  width: 50vw;
+  position: relative;
+  margin: 0 auto;
+}
+
+.ball,
+.bowler,
+.thala,
+.hitBall {
+  margin: 0 auto;
+  height: 50px;
+  width: 50px;
+}
+
+.wicket,
+.thala {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+}
+
+.thala {
+  transform: translate(-50%, -100%);
+  background-color: blue;
+  transition: all 100ms ease-in-out;
+}
+
+.bowler {
+  background-color: green;
+}
+
+.wicket {
+  display: flex;
+  height: 15px;
+  width: 100%;
+  justify-content: space-around;
+  transform: translateX(-50%);
+  /* background-color: black; */
+}
+
+.wicket > div {
+  background-color: brown;
+  height: 15px;
+  width: 50px;
+}
+
+.ball {
+  height: 12px;
+  width: 12px;
+  background-color: red;
+  position: absolute;
+  top: var(--posY);
+  left: var(--posX);
+  transform: translate(-50%, -100%);
+  border-radius: 50%;
+}
+
+.hitBall {
+  height: 12px;
+  width: 12px;
+  background-color: red;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  border-radius: 50%;
+  visibility: hidden;
+}
+
+.ball-hit {
+  animation: playerHitAnimation 1s linear;
+}
+
+/* player hit animation using keyframes */
+@keyframes playerHitAnimation {
+  100% {
+    display: none;
+    top: 0;
+    left: var(--left);
+  }
+
+  0% {
+    display: block;
+    top: var(--thalaPos);
+    left: var(--leftInit);
+  }
+}
+
+@keyframes ballToWicketAnimation {
+  0% {
+    top: var(--posY);
+    left: 50%;
+  }
+
+  100% {
+    top: var(--wicketPos);
+    left: 50%;
+  }
+}
+
+.ball-to-wicket {
+  animation: ballToWicketAnimation 2s linear forwards;
+}
